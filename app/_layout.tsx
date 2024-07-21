@@ -4,6 +4,7 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import { Ionicons } from '@expo/vector-icons'; // Import icon library
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
@@ -29,9 +30,32 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
+        <Stack.Screen 
+          name="(tabs)" 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="+not-found" 
+        />
+        {/* New Tab */}
+        <Stack.Screen 
+          name="new-tab" 
+          component={NewTabScreen} // Define this component separately
+          options={{ 
+            title: 'New Tab', 
+            tabBarIcon: () => <Ionicons name="md-star" size={24} color="black" /> // Example icon
+          }} 
+        />
       </Stack>
     </ThemeProvider>
+  );
+}
+
+// Example of NewTabScreen component
+function NewTabScreen() {
+  return (
+    <View>
+      <Text>Welcome to the New Tab!</Text>
+    </View>
   );
 }
